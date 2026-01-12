@@ -1,0 +1,12 @@
+[core]
+	repositoryformatversion = 0
+	filemode = true
+	bare = false
+	logallrefupdates = true
+	ignorecase = true
+	precomposeunicode = true
+[submodule]
+	active = .
+[remote "origin"]
+	url = https://git::@github.com/catppuccin/tmux
+	fetch = +refs/tags/v2.1.2:refs/tags/v2.1.2

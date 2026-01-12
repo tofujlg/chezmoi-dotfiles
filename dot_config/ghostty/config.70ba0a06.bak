@@ -1,0 +1,6 @@
+macos-titlebar-style = hidden
+theme = vesper
+font-family = "Ayu Mirage"
+shell-integration-features = no-title
+macos-titlebar-proxy-icon = hidden
+font-size = 18

@@ -1,0 +1,16 @@
+
+# theme = Catppuccin Mocha
+theme = Rose Pine
+
+font-family = "Ayu Mirage"
+shell-integration-features = no-title
+macos-titlebar-proxy-icon = hidden
+macos-titlebar-style = hidden
+font-size = 18
+keybind = shift+enter=text:\n
+window-padding-x = 0
+window-padding-y = 0
+window-padding-balance = false
+
+# Adjust cell dimensions to eliminate bottom padding
+adjust-cell-height = -1%
