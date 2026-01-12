@@ -1,0 +1,5 @@
+{"type": "regex-split", "input": "q", "n": 1}
+{"type": "regex-split", "input": "exit", "n": 1}
+{"type": "regex-split", "input": "q", "n": 2}
+{"type": "filename", "input": "product_complete_Sheet1.tsv", "n": 1}
+{"type": "filename", "input": "product_complete_Sheet1.xlsx", "n": 1}
