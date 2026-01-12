@@ -1,0 +1,150 @@
+# ----------------------------------
+# oh-my-zsh configuration
+# ----------------------------------
+
+export ZSH="/Users/tofuredbull/.oh-my-zsh"
+plugins=(git direnv)
+ZSH_THEME="robbyrussell"
+source $ZSH/oh-my-zsh.sh
+
+# oh-my-posh
+# eval "$(oh-my-posh init zsh --config ~/.config/ohmyposh/zen.toml)"
+eval "$(oh-my-posh init zsh --config ~/.config/ohmyposh/cappuccin_custom.json)"
+
+# test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
+
+# Source secrets (API keys, etc.)
+[ -f ~/.secrets ] && source ~/.secrets
+
+# ---------------------------------
+# Programming langs specific setups
+# ---------------------------------
+
+## Paths
+export PATH="$PATH:/Applications/flutter/bin"
+export PATH="/opt/homebrew/opt/mysql@5.7/bin:$PATH"
+export ANDROID_HOME=$HOME/Library/Android/sdk
+export PATH=$PATH:$ANDROID_HOME/emulator
+export PATH=$PATH:$ANDROID_HOME/platform-tools
+
+# Node
+# Initialize fnm
+eval "$(fnm env --use-on-cd --shell zsh)"
+
+# Ruby
+eval "$(rbenv init -)"
+
+# Java 
+# export JAVA_HOME=/Library/Java/JavaVirtualMachines/zulu-11.jdk/Contents/Home
+export JAVA_HOME=/Library/Java/JavaVirtualMachines/zulu-17.jdk/Contents/Home
+
+# Python
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/shims:$PATH"
+
+eval "$(pyenv init -)"
+setopt +o nomatch
+source ${HOME}/.ghcup/env
+
+# Django Pillow Fix attempts
+export CPPFLAGS="-I/opt/homebrew/opt/zlib/include"
+export LDLAGS="-L/opt/homebrew/opt/zlib/lib"
+export PKG_CONFIG_PATH="/opt/homebrew/opt/zlib/lib/pkgconfig"
+export PATH="/opt/homebrew/opt/postgresql@12/bin:$PATH"
+export DYLD_LIBRARY_PATH="/usr/local/opt/postgresql@12/lib:$DYLD_LIBRARY_PATH"
+
+# ----------------------------------
+# alias
+# ----------------------------------
+alias lg="lazygit"
+
+# ----------------------------------
+# Vim
+# ----------------------------------
+alias v="nvim"
+alias vi="nvim"
+alias vim="nvim"
+alias view="nvim -R"
+alias nvim-lazy="NVIM_APPNAME=LazyVim nvim"
+alias kim="NVIM_APPNAME=kickstart nvim"
+# alias nvim-chad="NVIM_APPNAME=NvChad nvim"
+# alias nvim-astro="NVIM_APPNAME=AstroNvim nvim"
+
+function nvims() {
+  items=("default" "kickstart" "LazyVim" "vanilla" )
+  config=$(printf "%s\n" "${items[@]}" | fzf --prompt=" Neovim Config  " --height=~50% --layout=reverse --border --exit-0)
+  if [[ -z $config ]]; then
+    echo "Nothing selected"
+    return 0
+  elif [[ $config == "default" ]]; then
+    config=""
+  fi
+  NVIM_APPNAME=$config nvim $@
+}
+
+bindkey -s ^a "nvims\n"
+
+# ----------------------------------
+# Utility Tools
+# ----------------------------------
+
+# Config for Yazi
+export EDITOR="nvim"
+
+function y() {
+	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
+	yazi "$@" --cwd-file="$tmp"
+	if cwd="$(command cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
+		builtin cd -- "$cwd"
+	fi
+}
+rm -f -- "$tmp"
+
+# Tmuxifier setup 
+export PATH="$HOME/.tmuxifier/bin:$PATH"
+eval "$(tmuxifier init -)"
+
+export BAT_THEME=tokyonight_night
+# bat setup
+alias cat="bat"
+
+# Eza setup
+alias ls="eza"
+alias ll="eza --color=always --long --git --no-filesize --icons=always --no-time --no-user"
+
+# direnv
+eval "$(direnv hook zsh)"
+
+# flutter
+export PATH="$PATH":"$HOME/.pub-cache/bin"
+
+## [Completion]
+## Completion scripts setup. Remove the following line to uninstall
+[[ -f /Users/tofuredbull/.dart-cli-completion/zsh-config.zsh ]] && . /Users/tofuredbull/.dart-cli-completion/zsh-config.zsh || true
+## [/Completion]
+
+
+# pnpm
+export PNPM_HOME="/Users/tofuredbull/Library/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
+
+# Zoxide setup
+eval "$(zoxide init zsh --cmd cd)"
+
+[[ "$TERM_PROGRAM" == "kiro" ]] && . "$(kiro --locate-shell-integration-path zsh)"
+export PATH="$HOME/.local/bin:$PATH"
+
+# Added by Antigravity
+export PATH="/Users/tofuredbull/.antigravity/antigravity/bin:$PATH"
+
+# opencode
+export PATH=/Users/tofuredbull/.opencode/bin:$PATH
+export PATH="$HOME/.local/bin:$PATH"
+
+# Atuin
+eval "$(atuin init zsh)"
