@@ -1,0 +1,8 @@
+# Automatically add keys to agent and use keychain
+AddKeysToAgent yes
+
+# Work GitHub (Specific Key)
+Host github-work
+  HostName github.com
+  User git
+  IdentityFile ~/.ssh/id_ed25519_sutrix

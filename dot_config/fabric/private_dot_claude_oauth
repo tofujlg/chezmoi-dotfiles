@@ -1,7 +1,0 @@
-{
-  "access_token": "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",
-  "refresh_token": "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",
-  "expires_at": 1768156742,
-  "token_type": "Bearer",
-  "scope": "user:inference user:profile"
-}
